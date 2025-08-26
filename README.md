@@ -26,7 +26,7 @@ Install the right version for your machine from: https://nodejs.org/en/blog/rele
 
 ### Git
 
-Install the
+Install the latest version for your machine from: https://git-scm.com/downloads
 
 - Check the versions after installation with:
 
@@ -45,6 +45,14 @@ git --version
 ## Configuration
 
 After finishing installation and clonning project to your machine you should navigate to project directory and than install dependencies with running command:
+(
+Running in powershell before npm install requires this command:
+
+```bash
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+)
 
 ```bash
 npm install
@@ -55,7 +63,7 @@ npm install
 Run the application with the command:
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 ## API Documentation
@@ -132,5 +140,3 @@ And 2 buttons:
   - Close the popup
   - Refresh the table to display te newly added transaction
 - If any field is empty or in the wrong format, an appropriate error message will appear at the bottom of the popup.
-
-4. Unsuccesfull request
