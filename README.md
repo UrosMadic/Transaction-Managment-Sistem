@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DOCUMENTATION
 
-## Getting Started
+## Prerequisites
 
-First, run the development server:
+Required software and versions:
+
+### 1. Node
+
+node version 22.5.1
+
+### 2. Npm
+
+npm version 10.8.2
+
+### 3. Git
+
+latest version
+
+## Installation
+
+Before running a project, make sure you have all the prerequisites installed on your machine:
+
+### Node and npm
+
+Install the right version for your machine from: https://nodejs.org/en/blog/release/v22.5.1
+
+### Git
+
+Install the
+
+- Check the versions after installation with:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+node -v
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm -v
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+git --version
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuration
 
-## Learn More
+After finishing installation and clonning project to your machine you should navigate to project directory and than install dependencies with running command:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the application with the command:
 
-## Deploy on Vercel
+```bash
+yarn dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Documentation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. GET/transactions endpoint
+
+Retrieve all transactions from the provided CSV file
+
+**Request example**
+
+```http
+GET /api/transactions
+```
+
+**Response example**
+
+- Status 200, OK
+  [
+  {Transaction Date: '2025-03-01', Account Number: '7289-3445-1121', Account Holder Name: 'Maria Johnson', Amount: '150.00', Status: 'Settled'},
+  {Transaction Date: '2025-03-02', Account Number: '1122-3456-7890', Account Holder Name: 'John Smith', Amount: '75.50', Status: 'Pending'},
+  ...
+  ]
+
+- Status 400, Bad request
+
+### 2. POST/transactions endpoint
+
+Add a new transaction to the CSV file
+
+**Request example**
+
+```http
+POST /api/transactions
+```
+
+body:
+{transactionDate: '2025-03-03', accountNumber: '3344-5566-7788', accountHolderName: 'Robert Chen', amount: '220.25'}
+
+headers: {"Content-Type": "application/json",}
+
+**Response example**
+
+- Status 201, Created
+  [
+  {transactionDate: '2025-03-03', accountNumber: '3344-5566-7788', accountHolderName: 'Robert Chen', amount: '220.25', Status: 'Failed'}
+  ]
+
+- Status 400, Bad request
+
+## Testing
+
+1. Open the application in your browser
+
+   After running the application (STEP Running the application) open the application in your browser by going to the http://localhost:3000 .
+   You will see the home page with a table that displays all transactions retrieved from the CSV file.
+
+2. Click on the "Add Transaction" button.
+   A modal popup will appear with a form containing the following fields:
+
+- Transaction Date (text input, format: YYYY-MM-DD)
+- Account Number (text input, format: XXXX-XXXX-XXXX)
+- Account Holder Name (text input)
+- Amount (number input)
+
+And 2 buttons:
+
+- Add Transaction for subbmiting transaction
+- Close for closing modal popup
+
+3. Succesfully adding a transaction
+
+- If all fields are correctly filled in the proper format, clicking "Add Transaction"
+  - Save the new transaction to CSV file
+  - Close the popup
+  - Refresh the table to display te newly added transaction
+- If any field is empty or in the wrong format, an appropriate error message will appear at the bottom of the popup.
+
+4. Unsuccesfull request
